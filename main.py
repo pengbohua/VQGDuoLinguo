@@ -19,15 +19,6 @@ from utils import sort_batch, load_vocab
 from utils import str2bool, int_min_two, plot_data, print_and_log
 from utils import PATH_VGG_WEIGHTS
 
-"""
-Train (with validation):
-python3 main.py --mode train --expt_name demo_expt --expt_dir /home/axe/Projects/VQA_baseline/results_log 
---train_img /home/axe/Datasets/VQA_Dataset/train2014 --train_file /home/axe/Datasets/VQA_Dataset/vqa_dataset.txt 
---val_img /home/axe/Datasets/VQA_Dataset/train2014 --val_file /home/axe/Projects/VQA_baseline/sample_data.txt  
---gpu_id 1 --num_epochs 50 --batch_size 256 --num_cls 2 --save_interval 1000 --log_interval 100 --run_name demo_run
---lr 1e-4
-Test:
-"""
 
 
 def main():

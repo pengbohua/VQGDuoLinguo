@@ -63,7 +63,7 @@ Question --> LSTM_encoder --> <i>question_embedding</i> <br>
 
 (image_embedding * question_embedding) --> MLP_Classifier --> <i>answer_logit</i>
 
-![Baseline](assets/vqa_baseline_architecture.png?raw=true "Baseline Architecture")
+![Baseline](assets/imvqg_architecture.png?raw=true "Baseline Architecture")
 
 <br>
 
@@ -88,10 +88,10 @@ ParallelCoAttention( image_embedding, question_embedding ) --> MLP_Classifier --
 Run the following script for training:
 
 ```bash
-$ python3 main.py --mode train --expt_name K_1000_Attn --expt_dir /home/axe/Projects/VQA_baseline/results_log \
---train_img /home/axe/Datasets/VQA_Dataset/raw/train2014 --train_file /home/axe/Datasets/VQA_Dataset/processed/vqa_train2014.txt \
---val_img /home/axe/Datasets/VQA_Dataset/raw/val2014 --val_file /home/axe/Datasets/VQA_Dataset/processed/vqa_val2014.txt\
---vocab_file /home/axe/Datasets/VQA_Dataset/processed/vocab_count_5_K_1000.pickle --save_interval 1000 \
+$ python3 main.py --mode train --expt_name K_1000_Attn --expt_dir ./results_log \
+--train_img ./Data/raw/train2014 --train_file./Data/processed/vqa_train2014.txt \
+--val_img ./Data/raw/val2014 --val_file ./Data/processed/vqa_val2014.txt\
+--vocab_file ./Data/processed/vocab_count_5_K_1000.pickle --save_interval 1000 \
 --log_interval 100 --gpu_id 0 --num_epochs 50 --batch_size 160 -K 1000 -lr 1e-4 --opt_lvl 1 --num_workers 6 \
 --run_name O1_wrk_6_bs_160 --model attention
 
