@@ -10,9 +10,28 @@ import pickle
 import os
 import errno
 import matplotlib.pyplot as plt
+import requests
+import json
+from bs4 import BeautifulSoup
 
 # Pre-trained VGG-11 weights
-PATH_VGG_WEIGHTS = '/home/axe/Projects/Pre_Trained_Models/vgg11_bn-6002323d.pth'
+PATH_VGG_WEIGHTS = './Pre_Trained_Models/vgg11_bn-6002323d.pth'
+
+
+def get_cefr(url):
+    # crawler for cefr
+
+    output_sentence = []
+    headers={"user-agent":"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"}
+    r = requests.get(url, headers=headers)
+    r_text = json.loads(r.text)
+    for wd, wd_attr in r_text['words'].items():
+        cefr_dict = wd_attr.get('cefr')
+        cefr_prd_dict = cefr_dict['predicted']
+        cefr_prd = cefr_prd_dict['p']
+        cefr_score = cefr_prd_dict['score']
+        output_sentence.append({'word': wd, 'soft_label': cefr_prd, 'score': cefr_score})
+    return output_sentence
 
 
 def pad_sequences(seq, max_len):
@@ -306,3 +325,13 @@ def int_min_two(k):
     k = int(k)
     assert k >= 2 and type(k) == int, 'Ensure k >= 2'
     return k
+
+
+if __name__ == '__main__':
+    words_list = ['what', 'is', 'the', 'man', 'holding']
+    # format '%22{w}%22'
+    words_list = [f'%22{w}%22' for w in words_list]
+    query_str = ','.join(words_list)
+    urll = f'https://cefr-tool-api.duolingo.com/words?la=en&responseType=json&strs=[{query_str}]'
+    sentence_cefr = get_cefr(urll)
+    print(len(words_list))

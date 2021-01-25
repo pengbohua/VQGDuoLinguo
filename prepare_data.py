@@ -13,6 +13,12 @@ from datahelper import VQA
 from utils import save_vocab
 import matplotlib.pyplot as plt
 import skimage.io as io
+# !spacy download en_core_web_sm
+# tell spacy to load from en_sm
+# !spacy link en_core_web_sm en_sm
+import spacy
+
+nlp_en = spacy.load('en_sm')
 
 def pad_with_zero(num, arg):
     """
