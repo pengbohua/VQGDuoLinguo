@@ -1,0 +1,15 @@
+results*
+/Data
+.DS_Store
+log*
+*.json
+*.pickle
+*del*.py
+.ipynb_checkpoints*
+*sample_data*.txt
+*sample.md
+.DS_Store
+*delete*
+tmp
+*pycache*
+*notes*txt
